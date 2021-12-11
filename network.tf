@@ -1,5 +1,3 @@
-
-
 provider "aws" {
     region      = "eu-central-1"
     access_key  = "AKIA26XYZMMBHL25FWER"
@@ -55,6 +53,3 @@ resource "aws_route" "internet_access" {
     #define gateway to internet
   gateway_id             = aws_internet_gateway.gw.id
 }
-
-
-
