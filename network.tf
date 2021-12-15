@@ -52,7 +52,7 @@ resource "aws_internet_gateway" "gw" {
     Name = "gw"
   }
 }
-/*
+
 resource "aws_route" "internet_access" {
     #what vpc use for route
   route_table_id         = aws_vpc.main.main_route_table_id
