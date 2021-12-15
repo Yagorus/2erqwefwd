@@ -13,6 +13,19 @@ variable "aws_profile_secret_key" {
   default = "y//KMbdyHnJnLaHALJJ8H+5/K3RivzdBiAL0VQz4"
 }
 
+variable "az_count" {
+  description = "Number of AZs to cover in a given region"
+  default     = "1"
+}
+variable "app_name" {
+    description = "Name of project"
+    type = string
+    default = "WebPage"
+}
+variable "environment" {
+  type = string
+  default = "VPC"
+}
 /*
 variable "aws_profile" {
   description = "aws profile"
@@ -33,11 +46,6 @@ variable "ecs_task_role_name" {
 variable "ecs_auto_scale_role_name" {
   description = "ECS auto scale role Name"
   default = "AutoScaleRole"
-}
-
-variable "az_count" {
-  description = "Number of AZs to cover in a given region"
-  default     = "2"
 }
 
 variable "app_port" {
@@ -64,17 +72,11 @@ variable "fargate_memory" {
   default     = "1024"
 }
 
-variable "environment" {
-  type = string
-}
 
 variable "ecr_repository_url" {
   type = string
 }
 
-variable "app_name" {
-  type = string
-}
 
 variable "image_tag" {
   type = string
