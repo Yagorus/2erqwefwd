@@ -80,7 +80,7 @@ resource "aws_nat_gateway" "gateway" {
   }
 }
 
-/*
+
 resource "aws_route_table" "private" {
   count = "1" 
   vpc_id = aws_vpc.main.id
@@ -99,4 +99,3 @@ resource "aws_route_table_association" "private" {
   subnet_id     = element(aws_subnet.public.*.id, count.index)
   route_table_id = aws_route_table.private[count.index].id
 }
-*/
