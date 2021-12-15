@@ -20,7 +20,7 @@ resource "aws_vpc" "main" {
   cidr_block       = "10.0.0.0/16"
   instance_tenancy = "default"
   tags = {
-    Name = "-private"
+    Name = "VPC-terrafrom"
   }
 }
 
@@ -31,14 +31,14 @@ resource "aws_subnet" "public" {
   availability_zone = data.aws_availability_zones.available.names[count.index]
   map_public_ip_on_launch = true
   tags = {
-    Name = "-public"
+    Name = "subnet-public"
   }
 }
 
 resource "aws_subnet" "private" {
   count      =  var.az_count
   vpc_id     = aws_vpc.main.id
-  cidr_block = cidrsubnet(aws_vpc.main.cidr_block, 8, count.index)
+  cidr_block = cidrsubnet(aws_vpc.main.cidr_block, 8, count.index + var.az_count)
   availability_zone = data.aws_availability_zones.available.names[count.index]
 
   tags = {
@@ -49,7 +49,7 @@ resource "aws_subnet" "private" {
 resource "aws_internet_gateway" "gw" {
   vpc_id = aws_vpc.main.id
   tags = {
-    Name = "-gw"
+    Name = "gw"
   }
 }
 /*
