@@ -1,37 +1,39 @@
-provider "aws" {
-    region      = var.aws_region
-    access_key  = "AKIA26XYZMMBHL25FWER"
-    secret_key  = "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"
-}
-
 data "aws_availability_zones" "available" {
 
 }
-
+/*
+- Make VPC network
+- Create subnets (private, public)
+- Create internet gateway (for connection to internet)
+- set up routes for public subnet  
+- create eip (for NAT)
+- create NAT gateway
+- set up routes for privte subnet
+*/
 resource "aws_vpc" "main" {
   cidr_block       = "10.0.0.0/16"
   instance_tenancy = "default"
   tags = {
-    Name = "terraform-vpc-test"
+    Name = "${var.app_name}-${var.environment}-private"
   }
 }
 
 resource "aws_subnet" "public" {
-  count      =  1
-  vpc_id     = aws_vpc.main.id
-  cidr_block = "10.0.1.0/24"
-  availability_zone = data.aws_availability_zones.available.names[0]
-
+  count      =  var.az_count
+  vpc_id     =  aws_vpc.main.id
+  cidr_block =  cidrsubnet(aws_vpc.main.cidr_block, 8, count.index)
+  availability_zone = data.aws_availability_zones.available.names[count.index]
+  map_public_ip_on_launch = true
   tags = {
-    Name = "subnet-public"
+    Name = "${var.app_name}-${var.environment}-public"
   }
 }
 
 resource "aws_subnet" "private" {
-  count      =  1
+  count      =  var.az_count
   vpc_id     = aws_vpc.main.id
-  cidr_block = "10.0.10.0/24"
-  availability_zone = data.aws_availability_zones.available.names[0]
+  cidr_block = cidrsubnet(aws_vpc.main.cidr_block, 8, count.index)
+  availability_zone = data.aws_availability_zones.available.names[count.index]
 
   tags = {
     Name = "subnet-private"
@@ -41,10 +43,10 @@ resource "aws_subnet" "private" {
 resource "aws_internet_gateway" "gw" {
   vpc_id = aws_vpc.main.id
   tags = {
-      Name = "Internet-gateway"
+    Name = "${var.app_name}-${var.environment}-gw"
   }
 }
-
+/*
 resource "aws_route" "internet_access" {
     #what vpc use for route
   route_table_id         = aws_vpc.main.main_route_table_id
@@ -53,7 +55,7 @@ resource "aws_route" "internet_access" {
     #define gateway to internet
   gateway_id             = aws_internet_gateway.gw.id
 }
-
+/*
 resource "aws_eip" "gw" {
   count = 1
   vpc = true
@@ -91,3 +93,4 @@ resource "aws_route_table_association" "private" {
   subnet_id     = element(aws_subnet.public.*.id, count.index)
   route_table_id = aws_route_table.private[count.index].id
 }
+*/
