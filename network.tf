@@ -14,7 +14,7 @@ resource "aws_vpc" "main" {
   cidr_block       = "10.0.0.0/16"
   instance_tenancy = "default"
   tags = {
-    Name = "${var.app_name}-${var.environment}-private"
+    Name = "-private"
   }
 }
 
@@ -25,7 +25,7 @@ resource "aws_subnet" "public" {
   availability_zone = data.aws_availability_zones.available.names[count.index]
   map_public_ip_on_launch = true
   tags = {
-    Name = "${var.app_name}-${var.environment}-public"
+    Name = "-public"
   }
 }
 
@@ -43,7 +43,7 @@ resource "aws_subnet" "private" {
 resource "aws_internet_gateway" "gw" {
   vpc_id = aws_vpc.main.id
   tags = {
-    Name = "${var.app_name}-${var.environment}-gw"
+    Name = "-gw"
   }
 }
 /*
