@@ -65,7 +65,7 @@ resource "aws_nat_gateway" "gateway" {
   }
 }
 
-
+/*
 resource "aws_route_table" "private" {
   count         =  var.az_count
   vpc_id = aws_vpc.main.id
@@ -78,7 +78,7 @@ resource "aws_route_table" "private" {
     Name = "RT-gateway"
   }
 }
-
+*/
 /*
 resource "aws_route_table_association" "private" {
   count = var.az_count
