@@ -19,14 +19,14 @@ variable "environment" {
 
 variable "aws_profile" {
   description = "aws profile"
-  default = "terraformuser"
+  default = "terraform-user"
 }
-/*
+
 variable "aws_profile_credentials" {
   description = "aws profile"
   default = "/home/yegor/.aws/credentials"
 }
-
+/*
 variable "remote_state_bucket" {}
 
 variable "ecs_task_execution_role_name" {
