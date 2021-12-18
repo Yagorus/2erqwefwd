@@ -3,16 +3,6 @@ variable "aws_region" {
   default = "eu-central-1"
 }
 
-variable "aws_profile_access_key" {
-  description = "aws access key"
-  default = "AKIA26XYZMMBHL25FWER"
-}
-
-variable "aws_profile_secret_key" {
-  description = "aws access key"
-  default = "y//KMbdyHnJnLaHALJJ8H+5/K3RivzdBiAL0VQz4"
-}
-
 variable "az_count" {
   description = "Number of AZs to cover in a given region"
   default     = "1"
@@ -27,8 +17,14 @@ variable "environment" {
   default = "VPC"
 }
 /*
+variable "aws_profile_credentials" {
+  description = "aws profile"
+  default = "/home/yegor/.aws/credentials"
+}
+*/
 variable "aws_profile" {
   description = "aws profile"
+  default = "terraformuser"
 }
 
 variable "remote_state_bucket" {}
@@ -89,4 +85,3 @@ variable "taskdef_template" {
 locals {
   app_image = format("%s:%s", var.ecr_repository_url, var.image_tag)
 }
-*/
