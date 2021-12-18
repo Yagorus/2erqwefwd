@@ -26,7 +26,6 @@ resource "aws_subnet" "private" {
   vpc_id     = aws_vpc.main.id
   cidr_block = cidrsubnet(aws_vpc.main.cidr_block, 8, count.index + var.az_count)
   availability_zone = data.aws_availability_zones.available.names[count.index]
-
   tags = {
     Name = "subnet-private"
   }
@@ -66,9 +65,9 @@ resource "aws_nat_gateway" "gateway" {
   }
 }
 
-
+/*
 resource "aws_route_table" "private" {
-  count = "1" 
+  count         =  var.az_count
   vpc_id = aws_vpc.main.id
 
   route {
@@ -79,10 +78,12 @@ resource "aws_route_table" "private" {
     Name = "RT-gateway"
   }
 }
-
+*/
+/*
 resource "aws_route_table_association" "private" {
   count = var.az_count
   subnet_id     = element(aws_subnet.public.*.id, count.index)
   route_table_id =element(aws_route_table.private.*.id, count.index)
   #route_table_id = aws_route_table.private[count.index].id
 }
+*/
