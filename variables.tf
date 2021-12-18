@@ -3,15 +3,15 @@ variable "aws_region" {
   default = "eu-central-1"
 }
 
-variable "aws_profile_access_key" {
+variable "aws_profile_access_key_path" {
   description = "aws access key"
-  default = "AKIA26XYZMMBHL25FWER"
+  default = "/home/yegor/.aws/credentials"
 }
 
 
-variable "aws_profile_secret_key" {
-  description = "aws access key"
-  default = "y//KMbdyHnJnLaHALJJ8H+5/K3RivzdBiAL0VQz4"
+variable "aws_profile" {
+  description = "aws profile"
+  default = "default"
 }
 
 variable "az_count" {
