@@ -1,7 +1,7 @@
 provider "aws" {
     region      = var.aws_region
     profile     = var.aws_profile 
-    shared_credentials_file = aws_profile_credentials
+    shared_credentials_file = var.aws_profile_credentials
     #access_key  = var.aws_profile_access_key
     #secret_key  = var.aws_profile_secret_key
 }
@@ -9,15 +9,7 @@ provider "aws" {
 data "aws_availability_zones" "available" {
 
 }
-/*
-- Make VPC network
-- Create subnets (private, public)
-- Create internet gateway (for connection to internet)
-- set up routes for public subnet  
-- create eip (for NAT)
-- create NAT gateway
-- set up routes for privte subnet
-*/
+
 resource "aws_vpc" "main" {
   cidr_block       = "10.0.0.0/16"
   instance_tenancy = "default"
