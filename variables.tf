@@ -16,16 +16,15 @@ variable "environment" {
   type = string
   default = "VPC"
 }
+
+variable "aws_profile" {
+  description = "aws profile"
+  default = "terraformuser"
+}
 /*
 variable "aws_profile_credentials" {
   description = "aws profile"
   default = "/home/yegor/.aws/credentials"
-}
-*/
-/*
-variable "aws_profile" {
-  description = "aws profile"
-  default = "terraformuser"
 }
 
 variable "remote_state_bucket" {}
