@@ -45,7 +45,7 @@ resource "aws_route" "internet_access" {
     #add routes 
     destination_cidr_block = "0.0.0.0/0"
     #define gateway to internet
-    gateway_id             = aws_internet_gateway.gw.id
+    gateway_id = aws_internet_gateway.gw.id
 }
 
 resource "aws_eip" "gw" {
@@ -81,7 +81,8 @@ resource "aws_route_table" "private" {
 }
 
 resource "aws_route_table_association" "private" {
-  count = "1"
+  count = var.az_count
   subnet_id     = element(aws_subnet.public.*.id, count.index)
-  route_table_id = aws_route_table.private[count.index].id
+  route_table_id =element(aws_route_table.private.*.id, count.index)
+  #route_table_id = aws_route_table.private[count.index].id
 }
