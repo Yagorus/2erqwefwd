@@ -1,14 +1,12 @@
 variable "aws_region" {
   description = "aws region"
-  default = "eu-central-1"
+  default = ["eu-central-1", "eu-north-1"]
 }
 
 variable "aws_profile_access_key_path" {
   description = "aws access key"
   default = "/home/yegor/.aws/credentials"
 }
-
-
 variable "aws_profile" {
   description = "aws profile"
   default = "default"
@@ -28,16 +26,6 @@ variable "environment" {
   default = "VPC"
 }
 /*
-variable "aws_profile_credentials" {
-  description = "aws profile"
-  default = "/home/yegor/.aws/credentials"
-}
-
-variable "aws_profile" {
-  description = "aws profile"
-  default = "terraformuser"
-}
-
 variable "remote_state_bucket" {}
 
 variable "ecs_task_execution_role_name" {
