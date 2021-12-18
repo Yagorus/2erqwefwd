@@ -22,6 +22,7 @@ variable "aws_profile_credentials" {
   default = "/home/yegor/.aws/credentials"
 }
 */
+/*
 variable "aws_profile" {
   description = "aws profile"
   default = "terraformuser"
@@ -85,3 +86,4 @@ variable "taskdef_template" {
 locals {
   app_image = format("%s:%s", var.ecr_repository_url, var.image_tag)
 }
+*/
