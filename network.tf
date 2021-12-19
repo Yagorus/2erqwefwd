@@ -41,9 +41,7 @@ resource "aws_route" "internet_access" {
     destination_cidr_block = "0.0.0.0/0"
     #define gateway to internet
     gateway_id = aws_internet_gateway.gw.id
-    tags = {
-      Name = "${var.app_name}-internet-access-route"
-    }
+    
 }
 
 resource "aws_eip" "gw" {
