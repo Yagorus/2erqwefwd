@@ -14,7 +14,7 @@ variable "aws_profile" {
 
 variable "az_count" {
   description = "Number of AZs to cover in a given region"
-  default     = "1"
+  default     = "2"
 }
 variable "app_name" {
     description = "Name of project"
