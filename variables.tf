@@ -20,7 +20,7 @@ variable "az_count" {
 variable "app_name" {
     description = "Name of project"
     type = string
-    default = "WebPage"
+    default = "web"
 }
 variable "environment" {
   type = string

@@ -2,7 +2,7 @@ resource "aws_vpc" "main" {
   cidr_block       = "10.0.0.0/16"
   instance_tenancy = "default"
   tags = {
-    Name = "VPC-terrafrom"
+    Name = "${var.app_name}-VPC"
   }
 }
 
@@ -13,7 +13,7 @@ resource "aws_subnet" "public" {
   availability_zone = data.aws_availability_zones.available.names[count.index]
   map_public_ip_on_launch = true
   tags = {
-    Name = "subnet-public"
+    Name = "${var.app_name}-subnet-public"
   }
 }
 
@@ -23,14 +23,14 @@ resource "aws_subnet" "private" {
   cidr_block = cidrsubnet(aws_vpc.main.cidr_block, 8, count.index + var.az_count)
   availability_zone = data.aws_availability_zones.available.names[count.index]
   tags = {
-    Name = "subnet-private"
+    Name = "${var.app_name}subnet-private"
   }
 }
 
 resource "aws_internet_gateway" "gw" {
     vpc_id = aws_vpc.main.id
     tags = {
-    Name = "gw"
+    Name = "${var.app_name}-gw"
   }
 }
 
@@ -41,6 +41,9 @@ resource "aws_route" "internet_access" {
     destination_cidr_block = "0.0.0.0/0"
     #define gateway to internet
     gateway_id = aws_internet_gateway.gw.id
+    tags = {
+      Name = "${var.app_name}-internet-access-route"
+    }
 }
 
 resource "aws_eip" "gw" {
@@ -48,7 +51,7 @@ resource "aws_eip" "gw" {
     vpc = true
     depends_on = [aws_internet_gateway.gw] 
     tags = {
-    Name = "EIP"
+    Name = "${var.app_name}EIP"
   }
 }
 
@@ -57,7 +60,7 @@ resource "aws_nat_gateway" "gateway" {
   subnet_id     = element(aws_subnet.public.*.id, count.index)
   allocation_id = element(aws_eip.gw.*.id, count.index)
   tags = {
-    Name = "Public-NAT-gateway"
+    Name = "${var.app_name}Public-NAT-gateway"
   }
 }
 
@@ -71,7 +74,7 @@ resource "aws_route_table" "private" {
     gateway_id = element(aws_nat_gateway.gateway.*.id, count.index)
   }
   tags = {
-    Name = "RT-gateway"
+    Name = "${var.app_name}-RT-gateway"
   }
 }
 
