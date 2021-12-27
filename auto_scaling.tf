@@ -15,7 +15,7 @@ resource "aws_autoscaling_group" "autoscaling" {
   desired_capacity          = 1
   force_delete              = true
   launch_configuration      = aws_launch_configuration.custom-launch-cfg.name
-  vpc_zone_identifier       = element(aws_subnet.*.id, count.index)
+  vpc_zone_identifier       = element(aws_subnet.public.*.id, count.index)
 
   tag {
     key                 = "Name"
