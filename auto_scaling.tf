@@ -15,7 +15,7 @@ resource "aws_autoscaling_group" "autoscaling" {
 
   tag {
     key                 = "Name"
-    value               = "${var.app_name}-VPC-autoscaling-group"
+    value               = "${var.app_name}-VPC-bastion"
     propagate_at_launch = true
   }
 }
