@@ -1,6 +1,6 @@
 resource "aws_launch_configuration" "launch" {
     name = "launch"
-    image_id = data.aws_ami_ids.ubuntu.id
+    image_id = data.aws_ami.ubuntu.id
     instance_type = "t2.micro"
 }
 
