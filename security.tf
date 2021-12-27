@@ -18,7 +18,7 @@ resource "aws_security_group" "asg" {
   }
 }
 resource "aws_security_group" "lb" {
-  name        = "${var.app_name}-${var.environment}-asg-sg"
+  name        = "${var.app_name}-${var.environment}-lb-sg"
   description = "controls access to the ALB"
   vpc_id      = aws_vpc.main.id
 
