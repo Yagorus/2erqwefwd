@@ -1,6 +1,7 @@
 resource "aws_launch_configuration" "launch" {
     name = "launch"
     image_id =  "ami-0d527b8c289b4af7f"
+    security_groups = aws_security_group.lb.id
     instance_type = "t2.micro"
 }
 
