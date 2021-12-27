@@ -1,9 +1,7 @@
 variable "aws_region" {
   description = "aws region"
-  default = ["eu-central-1"]
+  default = "eu-central-1"
 }
-
-#, "eu-north-1"
 variable "aws_profile_access_key_path" {
   description = "aws access key"
   default = "/home/yegor/.aws/credentials"

@@ -23,7 +23,7 @@ resource "aws_subnet" "private" {
   cidr_block = cidrsubnet(aws_vpc.main.cidr_block, 8, count.index + var.az_count)
   availability_zone = data.aws_availability_zones.available.names[count.index]
   tags = {
-    Name = "${var.app_name}subnet-private"
+    Name = "${var.app_name}-subnet-private"
   }
 }
 
@@ -49,7 +49,7 @@ resource "aws_eip" "gw" {
     vpc = true
     depends_on = [aws_internet_gateway.gw] 
     tags = {
-    Name = "${var.app_name}EIP"
+    Name = "${var.app_name}-EIP"
   }
 }
 
@@ -58,7 +58,7 @@ resource "aws_nat_gateway" "gateway" {
   subnet_id     = element(aws_subnet.public.*.id, count.index)
   allocation_id = element(aws_eip.gw.*.id, count.index)
   tags = {
-    Name = "${var.app_name}Public-NAT-gateway"
+    Name = "${var.app_name}-Public-NAT-gateway"
   }
 }
 
