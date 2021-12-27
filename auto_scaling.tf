@@ -7,12 +7,11 @@ resource "aws_launch_configuration" "launch" {
 
 resource "aws_autoscaling_group" "autoscaling" { 
   depends_on                = [aws_launch_configuration.launch]
-  count                     = var.az_count
-  name                      = "bastion-server-as"
+  name                      = "auto-scale-group-test"
   max_size                  = 1
   min_size                  = 1
   launch_configuration      = aws_launch_configuration.launch.name
-  vpc_zone_identifier       = [aws_subnet.public[count.index].id] 
+  vpc_zone_identifier       = [aws_subnet.public[*].id] 
 
   tag {
     key                 = "Name"
