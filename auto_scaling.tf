@@ -4,21 +4,6 @@ resource "aws_launch_configuration" "launch" {
     instance_type = "t2.micro"
 }
 
-data "aws_ami" "ubuntu" {
-    most_recent = true
-    owners = ["self"]
-    filter {
-        name   = "name"
-        values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
-    }
-
-    filter {
-        name = "virtualization-type"
-        values = ["hvm"]
-    }
-
-}
-
 resource "aws_autoscaling_group" "autoscaling" { 
   depends_on                = [aws_launch_configuration.launch]
   count                     = var.az_count
