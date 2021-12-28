@@ -1,4 +1,5 @@
 
+/*
 resource "aws_alb" "main" {
   name            = "${var.app_name}-${var.environment}-lb"
   subnets         = aws_subnet.public.*.id
@@ -33,3 +34,4 @@ resource "aws_alb_listener" "front_end" {
     type             = "forward"
   }
 }
+*/
