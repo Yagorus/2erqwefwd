@@ -12,10 +12,10 @@ resource "aws_launch_configuration" "launch" {
     }
 }
 
-/*
 resource "aws_autoscaling_group" "app" { 
   depends_on                = [aws_launch_configuration.launch]
   name                      = "auto-asg"
+  desired_capacity          = 2
   max_size                  = 2
   min_size                  = 2
   health_check_type         = "EC2"
@@ -30,7 +30,7 @@ resource "aws_autoscaling_group" "app" {
     propagate_at_launch = true
   }
 }
-*/
+
 /*
 resource "aws_autoscaling_attachment" "name" {
   autoscaling_group_name = aws_autoscaling_attachment.app.id
