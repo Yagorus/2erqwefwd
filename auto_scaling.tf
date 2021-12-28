@@ -18,7 +18,7 @@ resource "aws_autoscaling_group" "autoscaling" {
   launch_configuration      = aws_launch_configuration.launch.name
   health_check_type = "ELB"
   vpc_zone_identifier       = [element(aws_subnet.public[*].id, var.az_count)]
-  load_balancers = [aws_elb.main.id]
+  load_balancers = [aws_alb.main.id]
 
   tag {
     key                 = "Name"
