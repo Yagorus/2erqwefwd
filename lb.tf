@@ -12,7 +12,7 @@ resource "aws_elb" "main" {
 
 
   health_check {
-    target = "HTTP:8000/"
+    target = "HTTP:80/"
     healthy_threshold   = "3"
     interval            = "30"
     timeout             = "3"
