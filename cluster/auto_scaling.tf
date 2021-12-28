@@ -1,8 +1,9 @@
 resource "aws_launch_configuration" "launch" {
     name = "launch"
-    image_id =  "ami-0d527b8c289b4af7f"
+    image_id = data.aws_ami.linux.id
     security_groups = [aws_security_group.asg.id]
     instance_type = "t2.micro"
+    user_data = file("user_data.sh")
 }
 
 resource "aws_autoscaling_group" "autoscaling" { 
@@ -11,7 +12,8 @@ resource "aws_autoscaling_group" "autoscaling" {
   max_size                  = 1
   min_size                  = 1
   launch_configuration      = aws_launch_configuration.launch.name
-  vpc_zone_identifier       = [element(aws_subnet.public[*].id, var.az_count)] 
+  vpc_zone_identifier       = [element(aws_subnet.public[*].id, var.az_count)]
+
 
   tag {
     key                 = "Name"
