@@ -1,6 +1,6 @@
 resource "aws_launch_configuration" "launch" {
     name = "launch"
-    image_id = data.aws_ami.linux.id
+    image_id = ["ami-0d527b8c289b4af7f"]
     security_groups = [aws_security_group.asg.id]
     instance_type = "t2.micro"
     user_data = file("user_data.sh")
