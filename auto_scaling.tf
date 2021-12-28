@@ -10,19 +10,24 @@ resource "aws_launch_configuration" "launch" {
     }
 }
 
-resource "aws_autoscaling_group" "autoscaling" { 
+resource "aws_autoscaling_group" "app" { 
   depends_on                = [aws_launch_configuration.launch]
   name                      = "auto-scale-group"
   max_size                  = 2
   min_size                  = 2
   launch_configuration      = aws_launch_configuration.launch.name
-  health_check_type = "ELB"
+  health_check_type         = "ELB"
   vpc_zone_identifier       = [element(aws_subnet.public[*].id, var.az_count)]
-  load_balancers = [aws_alb.main.id]
+  load_balancers            = [aws_alb.main.id]
+  target_group_arns = [aws_alb_target_group.app.arn]
 
   tag {
     key                 = "Name"
     value               = "${var.app_name}-VPC-bastion"
     propagate_at_launch = true
   }
+}
+resource "aws_autoscaling_attachment" "name" {
+  autoscaling_group_name = aws_autoscaling_attachment.app.name
+  alb_target_group_arn = aws_alb_target_group.app.arn
 }
