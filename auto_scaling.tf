@@ -16,10 +16,10 @@ resource "aws_autoscaling_group" "app" {
   max_size                  = 2
   min_size                  = 2
   launch_configuration      = aws_launch_configuration.launch.name
-  health_check_type         = "ELB"
+  health_check_type         = "EC2"
   vpc_zone_identifier       = [element(aws_subnet.public[*].id, var.az_count)]
   load_balancers            = [aws_alb.main.id]
-  target_group_arns = [aws_alb_target_group.app.arn]
+  target_group_arns         = [aws_alb_target_group.app.arn]
 
   tag {
     key                 = "Name"
