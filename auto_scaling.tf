@@ -20,7 +20,7 @@ resource "aws_autoscaling_group" "app" {
   #availability_zones        = [element(data.availability_zones.names[*], var.az_count)]  
   vpc_zone_identifier       = [element(aws_subnet.public[*].id, var.az_count)]
   #load_balancers            = [aws_alb.main.id]
-  target_group_arns         = [aws_alb_target_group.app.arn]
+  #target_group_arns         = [aws_alb_target_group.app.arn]
 
   tag {
     key                 = "Name"
