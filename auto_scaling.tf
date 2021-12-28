@@ -17,8 +17,8 @@ resource "aws_autoscaling_group" "app" {
   min_size                  = 2
   health_check_type         = "EC2"
   launch_configuration      = aws_launch_configuration.launch.name
+  vpc_zone_identifier       = [for subnet in aws_subnet.public : subnet.id]
   #availability_zones        = [element(data.availability_zones.names[*], var.az_count)]  
-  vpc_zone_identifier       = [element(aws_subnet.public[*].id, var.az_count)]
   #load_balancers            = [aws_alb.main.id]
   #target_group_arns         = [aws_alb_target_group.app.arn]
 
