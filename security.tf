@@ -50,12 +50,12 @@ resource "aws_security_group" "lb" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
-*/
+
 resource "aws_security_group" "lb" {
     name = "Dybnamic SG"
 
     dynamic "ingress" {
-      for_each = ["80", "443"]
+      for_each = ["80","8000"]
       content {
         from_port = ingress.value
         to_port   = ingress.value
@@ -74,3 +74,4 @@ resource "aws_security_group" "lb" {
     Name = "sg-lb"
   }
 }
+*/
