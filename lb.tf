@@ -2,7 +2,7 @@ resource "aws_elb" "main" {
   name            = "${var.app_name}-${var.environment}-lb"
   subnets         = aws_subnet.public.*.id
   security_groups = [aws_security_group.lb.id]
-  availability_zones = [aws_availability_zones.available[0], aws_availability_zones.available[1]]
+  availability_zones = [data.aws_availability_zones.available.names[0],data.aws_availability_zones.available.names[1]]
   listener {
     lb_port = 80
     lb_protocol = "http"
