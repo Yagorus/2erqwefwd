@@ -12,8 +12,8 @@ resource "aws_launch_configuration" "launch" {
 resource "aws_autoscaling_group" "autoscaling" { 
   depends_on                = [aws_launch_configuration.launch]
   name                      = "auto-scale-group"
-  max_size                  = 1
-  min_size                  = 1
+  max_size                  = 2
+  min_size                  = 2
   launch_configuration      = aws_launch_configuration.launch.name
   health_check_type = "ELB"
   vpc_zone_identifier       = [element(aws_subnet.public[*].id, var.az_count)]
