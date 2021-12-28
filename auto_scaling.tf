@@ -28,6 +28,6 @@ resource "aws_autoscaling_group" "app" {
   }
 }
 resource "aws_autoscaling_attachment" "name" {
-  autoscaling_group_name = aws_autoscaling_attachment.app.name
+  autoscaling_group_name = aws_autoscaling_attachment.app.id
   alb_target_group_arn = aws_alb_target_group.app.arn
 }
