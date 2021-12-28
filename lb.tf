@@ -1,5 +1,5 @@
 resource "aws_elb" "main" {
-  depends_on      = [aws_autoscaling_group.autoscaling]
+  #depends_on      = [aws_autoscaling_group.autoscaling]
   name            = "${var.app_name}-${var.environment}-lb"
   subnets         = aws_subnet.public.*.id
   security_groups = [aws_security_group.asg.id]
