@@ -2,13 +2,14 @@ resource "aws_elb" "main" {
   name            = "${var.app_name}-${var.environment}-lb"
   subnets         = aws_subnet.public.*.id
   security_groups = [aws_security_group.lb.id]
-  availability_zones = [data.aws_availability_zones.available.names[0],data.aws_availability_zones.available.names[1]]
+  availability_zones = [element (data.aws_availability_zones.available.names[*], var.az_count)]
   listener {
-    lb_port = 80
-    lb_protocol = "http"
-    instance_port = 80
+    instance_port     = 8000
     instance_protocol = "http"
+    lb_port           = 80
+    lb_protocol       = "http"
   }
+
 
   health_check {
     target = "HTTP:80/"
