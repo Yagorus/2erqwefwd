@@ -2,7 +2,7 @@ resource "aws_elb" "main" {
   name            = "${var.app_name}-${var.environment}-lb"
   subnets         = aws_subnet.public.*.id
   security_groups = [aws_security_group.lb.id]
-  availability_zone = [element(aws_availability_zones.available.name[*], var.az_count)]
+  availability_zones = [element(aws_availability_zones.available.name[*], var.az_count)]
   listener {
     lb_port = 80
     lb_protocol = "http"
@@ -11,12 +11,10 @@ resource "aws_elb" "main" {
   }
 
   health_check {
+    target = "HTTP:80/"
     healthy_threshold   = "3"
     interval            = "30"
-    protocol            = "HTTP"
-    matcher             = "200"
     timeout             = "3"
-    path                = "/"
     unhealthy_threshold = "2"
   }
   tags = {
