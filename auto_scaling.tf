@@ -1,5 +1,5 @@
 
-
+/*
 resource "aws_launch_configuration" "launch" {
     depends_on  = [aws_security_group.asg]
     name = "launch"
@@ -30,7 +30,7 @@ resource "aws_autoscaling_group" "app" {
     propagate_at_launch = true
   }
 }
-
+*/
 /*
 resource "aws_autoscaling_attachment" "name" {
   autoscaling_group_name = aws_autoscaling_attachment.app.id
