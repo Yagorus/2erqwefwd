@@ -1,4 +1,3 @@
-/*
 resource "aws_launch_configuration" "launch" {
     depends_on  = [aws_security_group.asg]
     name = "launch"
@@ -35,5 +34,3 @@ resource "aws_autoscaling_attachment" "name" {
   autoscaling_group_name = aws_autoscaling_group.app.name
   alb_target_group_arn  =  aws_alb_target_group.app.arn
 }
-
-*/
