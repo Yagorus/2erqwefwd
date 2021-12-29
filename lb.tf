@@ -1,9 +1,11 @@
 
 
-resource "aws_alb" "main" {
+resource "aws_lb" "main" {
   name            = "${var.app_name}-${var.environment}-lb"
-  subnets         = aws_subnet.public.*.id
+  subnets         = [for subnet in aws_subnet.public : subnet.id]
   security_groups = [aws_security_group.lb.id]
+  load_balancer_type = "application"
+
 }
 
 resource "aws_alb_target_group" "app" {
@@ -32,5 +34,18 @@ resource "aws_alb_listener" "front_end" {
   default_action {
     target_group_arn = aws_alb_target_group.app.arn
     type             = "forward"
+  }
+}
+
+resource "aws_alb_listener_rule" "listener_rule" {
+  depends_on   = ["aws_alb_target_group.app"]  
+  listener_arn = aws_alb_listener.front_end.arn  
+  action {    
+    type             = "forward"    
+    target_group_arn = "${aws_alb_target_group.app.id}"  
+  }   
+  condition {    
+    field  = "path-pattern"    
+    values = ["/"]  
   }
 }
