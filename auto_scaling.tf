@@ -4,9 +4,7 @@ resource "aws_launch_configuration" "launch" {
     image_id = "ami-0d527b8c289b4af7f"
     security_groups = [aws_security_group.asg.id]
     instance_type = "t2.micro"
-    user_data = templatefile("user_data.sh.tpl",{
-      az = aws_subnet.private[*].availability_zone,
-    })
+    user_data = file("user_data.sh")
     lifecycle {
       create_before_destroy = true
     }
@@ -21,6 +19,7 @@ resource "aws_autoscaling_group" "app" {
   health_check_type         = "EC2"
   launch_configuration      = aws_launch_configuration.launch.name
   vpc_zone_identifier       = [for subnet in aws_subnet.private : subnet.id]
+  #load_balancers            = [aws_lb.main.id]
   target_group_arns         = [aws_alb_target_group.app.arn]
 
   tag {
