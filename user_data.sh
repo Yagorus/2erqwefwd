@@ -6,6 +6,8 @@ cat << EOF > /var/www/html/index.html
 <html>
     <body>
         <h2>Hello World</h2>
+        <h2>sdf</h2>
+        
     </body>
 </html>
 EOF
