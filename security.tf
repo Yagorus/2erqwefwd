@@ -1,4 +1,4 @@
-resource "aws_security_group" "asg" {
+resource "aws_security_group" "ec2" {
   name        = "${var.app_name}-${var.environment}-asg-sg"
   description = "controls access to the ALB"
   vpc_id      = aws_vpc.main.id

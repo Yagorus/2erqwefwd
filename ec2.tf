@@ -5,8 +5,9 @@ resource "aws_instance" "name" {
 
     ami = "ami-05d34d340fb1d89e5"
     instance_type = "t2.micro"
+    key_name = "VPC_key_rsa"
 
-    security_groups = [aws_security_group.asg.id]
+    security_groups = [aws_security_group.ec2.id]
     
     user_data = file("user_data.sh")
 
