@@ -46,7 +46,7 @@ resource "aws_alb_listener_rule" "listener_rule" {
   }   
   condition {
     path-pattern {
-      values = ["/"]
+      values = ["/*"]
     
     }        
   }
