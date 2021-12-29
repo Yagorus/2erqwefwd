@@ -3,7 +3,7 @@ resource "aws_instance" "name" {
     count         = var.az_count
     subnet_id =  element(aws_subnet.public.*.id, count.index)
 
-    ami = "ami-05d34d340fb1d89e5"
+    ami = "ami-0d527b8c289b4af7f"
     instance_type = "t2.micro"
     key_name = "VPC_key_rsa"
 
