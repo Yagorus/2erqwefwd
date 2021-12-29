@@ -45,8 +45,8 @@ resource "aws_alb_listener_rule" "listener_rule" {
     target_group_arn = "${aws_alb_target_group.app.id}"  
   }   
   condition {
-    path-pattern {
-      values = ["/*"]
+    path_pattern {
+      values = ["/"]
     
     }        
   }
