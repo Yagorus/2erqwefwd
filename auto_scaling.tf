@@ -5,7 +5,7 @@ resource "aws_launch_configuration" "launch" {
     security_groups = [aws_security_group.asg.id]
     instance_type = "t2.micro"
     user_data = templatefile("user_data.sh.tpl",{
-      az = data.aws_availability_zones.available.names
+      az = data.aws_availability_zones.available.names[*]
     })
     lifecycle {
       create_before_destroy = true
