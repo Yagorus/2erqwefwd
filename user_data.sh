@@ -1,6 +1,8 @@
 #!/bin/bash
-sudo apt-get update
-sudo apt-get install apache2
+yum -y update
+yum -y install httpd
+
+myip=`curl http://169.254.169.254/latest/meta-data/local-ipv4`
 
 cat << EOF > /var/www/html/index.html
 <html>
@@ -9,5 +11,5 @@ cat << EOF > /var/www/html/index.html
     </body>
 </html>
 EOF
-
-sudo systemctl start apache2
+sudo service httpd start
+chkconfig httpd on
