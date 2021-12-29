@@ -1,6 +1,6 @@
 #!/bin/bash
-sudo apt-get update
-sudo apt-get install apache2
+sudo apt-get -y update
+sudo apt-get -y install apache2
 
 cat << EOF > /var/www/html/index.html
 <html>
@@ -9,6 +9,6 @@ cat << EOF > /var/www/html/index.html
     </body>
 </html>
 EOF
-    sudo systemctl enable apache2.service
-    sudo systemctl start apache2.service
-    sudo ufw allow 80/tcp comment 'accept Apache'
+sudo systemctl enable apache2.service
+sudo systemctl start apache2.service
+sudo ufw allow 80/tcp comment 'accept Apache'

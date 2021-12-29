@@ -1,3 +1,4 @@
+/*
 resource "aws_instance" "name" {
     depends_on  = [aws_security_group.ec2, aws_subnet.public]
     count         = var.az_count
@@ -15,3 +16,4 @@ resource "aws_instance" "name" {
         Name = "${var.app_name}-ec2"
     }
 }
+*/

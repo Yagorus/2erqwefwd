@@ -1,5 +1,3 @@
-
-/*
 resource "aws_launch_configuration" "launch" {
     depends_on  = [aws_security_group.asg]
     name = "launch"
@@ -21,8 +19,8 @@ resource "aws_autoscaling_group" "app" {
   health_check_type         = "EC2"
   launch_configuration      = aws_launch_configuration.launch.name
   vpc_zone_identifier       = [for subnet in aws_subnet.public : subnet.id]
-  #load_balancers            = [aws_alb.main.id]
-  #target_group_arns         = [aws_alb_target_group.app.arn]
+  load_balancers            = [aws_alb.main.id]
+  target_group_arns         = [aws_alb_target_group.app.arn]
 
   tag {
     key                 = "Name"
@@ -30,10 +28,10 @@ resource "aws_autoscaling_group" "app" {
     propagate_at_launch = true
   }
 }
-*/
-/*
+
+
 resource "aws_autoscaling_attachment" "name" {
   autoscaling_group_name = aws_autoscaling_attachment.app.id
   alb_target_group_arn = aws_alb_target_group.app.arn
 }
-*/
+
