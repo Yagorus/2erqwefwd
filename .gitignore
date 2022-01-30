@@ -1,0 +1,24 @@
+#python files
+/venv/
+/config.py
+
+#terraform files
+*.tfstate
+*.tfstate.backup
+.terraform.tfstate.lock.info
+.DS_Store
+.vscode
+.terraform.lock.hcl
+terraform.tfvars
+secrets.hcl
+secret.tfvars
+
+# Module directory
+.terraform/
+.terragrunt-cache/
+
+tags
+*~
+*.sw[op]
+.vscode
+.idea
